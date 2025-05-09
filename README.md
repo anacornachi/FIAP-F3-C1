@@ -120,6 +120,84 @@ Como este projeto foi desenvolvido em um ambiente 100% simulado, não é possív
 
 Em um cenário real, essa comunicação seria feita com um ESP32 físico e uma conexão serial real utilizando pyserial.
 
+## 📊 Entrega 2: Armazenamento de Dados em Banco SQL com Python
+
+### Estrutura do Banco de Dados
+
+O sistema utiliza um banco de dados SQL para armazenar os dados coletados dos sensores. A estrutura foi projetada seguindo o MER (Modelo Entidade-Relacionamento) desenvolvido na Fase 2, com as seguintes tabelas principais:
+
+- **sensor_records**: Armazena as leituras dos sensores
+  - ID (chave primária)
+  - Timestamp
+  - Umidade do solo
+  - pH
+  - Presença de Fósforo (P)
+  - Presença de Potássio (K)
+  - Status da bomba
+
+- **climate_data**: Armazena dados meteorológicos
+  - ID (chave primária)
+  - Timestamp
+  - Temperatura
+  - Umidade do ar
+  - Precipitação
+
+### Operações CRUD
+
+O sistema implementa todas as operações CRUD básicas:
+
+1. **Create (Criar)**
+   - Inserção de novos registros de sensores
+   - Inserção de dados climáticos
+
+2. **Read (Ler)**
+   - Consulta de histórico de leituras
+   - Visualização de dados climáticos
+   - Análises estatísticas
+
+3. **Update (Atualizar)**
+   - Correção de registros incorretos
+   - Atualização de status da bomba
+
+4. **Delete (Remover)**
+   - Remoção de registros antigos
+   - Limpeza de dados inválidos
+
+### Dashboard Interativo
+
+O sistema inclui um dashboard desenvolvido com Streamlit que permite:
+
+- Visualização em tempo real dos dados dos sensores
+- Gráficos de tendência para cada variável
+- Exportação de dados para CSV/PDF
+- Interface para operações CRUD
+- Análises estatísticas básicas
+
+### Como Testar o Sistema
+
+1. **Simulação de Dados**:
+   ```bash
+   python src/python/simulate_sensors.py
+   ```
+
+2. **Visualização no Dashboard**:
+   ```bash
+   streamlit run src/python/app_dashboard.py
+   ```
+
+3. **Operações CRUD via CLI**:
+   ```bash
+   python src/python/db_operations.py
+   ```
+
+### Relação com o MER da Fase 2
+
+A implementação do banco de dados segue fielmente o MER desenvolvido na Fase 2, com algumas adaptações práticas:
+
+- Adição de timestamps para rastreamento temporal
+- Implementação de índices para otimização de consultas
+- Relacionamentos mantidos conforme especificação original
+
 ## 🗃 Histórico de lançamentos
 
 - 0.3.0 - 04/05/2025

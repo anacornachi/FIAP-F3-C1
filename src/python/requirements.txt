@@ -1,11 +1,17 @@
-oracledb==3.1.0
-SQLAlchemy==2.0.40
+oracledb==1.4.1
+SQLAlchemy==2.0.27
+streamlit==1.44.1
 pandas==2.2.3
-numpy==2.0.2
-python-dotenv==1.1.0
+numpy==2.2.5
+python-dotenv==1.0.1
+psycopg2-binary==2.9.9
+pytest==8.0.2
+black==23.11.0
+flake8==6.1.0
+mypy==1.7.1
+pytest-cov==4.1.0
 requests==2.32.3
 pyserial==3.5
-streamlit==1.45.0
 matplotlib==3.10.1
-seaborn== 0.13.2
+seaborn==0.13.2
 weasyprint==65.1

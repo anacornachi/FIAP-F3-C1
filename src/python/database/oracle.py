@@ -1,22 +1,35 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
 
+# Carrega variáveis de ambiente
 load_dotenv()
 
-DB_USER = os.getenv("ORACLE_USER")
-DB_PASSWORD = os.getenv("ORACLE_PASSWORD")
-DB_HOST = os.getenv("ORACLE_HOST")
-DB_PORT = os.getenv("ORACLE_PORT")
-DB_SERVICE = os.getenv("ORACLE_SERVICE")
+# Configuração da conexão com o banco
+ORACLE_USER = os.getenv('ORACLE_USER', 'system')
+ORACLE_PASSWORD = os.getenv('ORACLE_PASSWORD', 'oracle')
+ORACLE_HOST = os.getenv('ORACLE_HOST', 'localhost')
+ORACLE_PORT = os.getenv('ORACLE_PORT', '1521')
+ORACLE_SERVICE = os.getenv('ORACLE_SERVICE', 'XE')
 
-DATABASE_URL = f"oracle+oracledb://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_SERVICE}"
+# String de conexão
+DATABASE_URL = f"oracle://{ORACLE_USER}:{ORACLE_PASSWORD}@{ORACLE_HOST}:{ORACLE_PORT}/{ORACLE_SERVICE}"
 
-engine = create_engine(DATABASE_URL, echo=False)
+# Cria o engine do SQLAlchemy
+engine = create_engine(DATABASE_URL)
 
-session_factory = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+# Cria a sessão
+session_factory = sessionmaker(bind=engine)
 Session = scoped_session(session_factory)
+
+def get_session():
+    """Retorna uma nova sessão do banco de dados."""
+    return Session()
+
+def close_session():
+    """Fecha a sessão atual."""
+    Session.remove()
 
 class DB:
     session = Session
